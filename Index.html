@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Responsive enterprise dashboard with dynamic REST API data."
+    >
+
+    <title>Enterprise Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-content">
+
+            <div class="brand">
+                <p class="eyebrow">Enterprise Portal</p>
+                <h1>Enterprise Dashboard</h1>
+            </div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#users">Users</a></li>
+                    <li><a href="#api-products">Products</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <div class="container page-layout">
+
+        <aside class="sidebar" aria-label="Sidebar">
+
+            <div class="sidebar-inner">
+
+                <h2>Quick Links</h2>
+
+                <nav aria-label="Sidebar navigation">
+                    <ul class="sidebar-nav">
+                        <li><a href="#dashboard">Overview</a></li>
+                        <li><a href="#reports">Reports</a></li>
+                        <li><a href="#users">Users</a></li>
+                        <li><a href="#api-products">Products</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </aside>
+
+
+        <main id="dashboard" class="main-content">
+
+            <section class="dashboard-section" aria-labelledby="overview-title">
+
+                <div class="section-heading">
+                    <p class="eyebrow">Overview</p>
+
+                    <h2 id="overview-title">
+                        Dashboard Overview
+                    </h2>
+
+                    <p>
+                        Monitor users, projects, tasks and business
+                        performance from one place.
+                    </p>
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <article class="dashboard-card">
+                        <div class="card-icon" aria-hidden="true">👥</div>
+                        <p class="card-label">Total Users</p>
+                        <h3>1,250</h3>
+                        <p class="card-status">+8.4% this month</p>
+                    </article>
+
+                    <article class="dashboard-card">
+                        <div class="card-icon" aria-hidden="true">📊</div>
+                        <p class="card-label">Active Projects</p>
+                        <h3>48</h3>
+                        <p class="card-status">12 projects in progress</p>
+                    </article>
+
+                    <article class="dashboard-card">
+                        <div class="card-icon" aria-hidden="true">✓</div>
+                        <p class="card-label">Completed Tasks</p>
+                        <h3>326</h3>
+                        <p class="card-status">92% completion rate</p>
+                    </article>
+
+                    <article class="dashboard-card">
+                        <div class="card-icon" aria-hidden="true">📈</div>
+                        <p class="card-label">Monthly Growth</p>
+                        <h3>12%</h3>
+                        <p class="card-status">Higher than last month</p>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- TASK 5: REST API SECTION -->
+
+            <section
+                id="api-products"
+                class="content-section"
+                aria-labelledby="products-title"
+            >
+
+                <div class="section-heading">
+
+                    <p class="eyebrow">Live REST API</p>
+
+                    <h2 id="products-title">
+                        Product Management
+                    </h2>
+
+                    <p>
+                        Products are loaded dynamically from a public REST API.
+                    </p>
+
+                </div>
+
+
+                <!-- Search and Sort -->
+
+                <div class="api-controls">
+
+                    <label for="search-input">
+                        Search products
+                    </label>
+
+                    <input
+                        type="search"
+                        id="search-input"
+                        placeholder="Search products..."
+                        aria-label="Search products"
+                    >
+
+
+                    <label for="sort-select">
+                        Sort products
+                    </label>
+
+                    <select id="sort-select">
+                        <option value="default">Default</option>
+                        <option value="price-low">
+                            Price: Low to High
+                        </option>
+                        <option value="price-high">
+                            Price: High to Low
+                        </option>
+                        <option value="name">
+                            Name: A to Z
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <!-- Category Tabs -->
+
+                <div
+                    class="category-tabs"
+                    role="group"
+                    aria-label="Product categories"
+                >
+
+                    <button
+                        type="button"
+                        class="category-btn active"
+                        data-category="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="men's clothing"
+                    >
+                        Men's Clothing
+                    </button>
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="women's clothing"
+                    >
+                        Women's Clothing
+                    </button>
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="jewelery"
+                    >
+                        Jewelery
+                    </button>
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="electronics"
+                    >
+                        Electronics
+                    </button>
+
+                </div>
+
+
+                <!-- Error Banner -->
+
+                <div
+                    id="error-message"
+                    class="error-message"
+                    role="alert"
+                    hidden
+                ></div>
+
+
+                <!-- Loading Skeleton -->
+
+                <div
+                    id="loading"
+                    class="loading"
+                    aria-live="polite"
+                >
+                    <div class="skeleton"></div>
+                    <div class="skeleton"></div>
+                    <div class="skeleton"></div>
+                </div>
+
+
+                <!-- API Products -->
+
+                <div
+                    id="products-container"
+                    class="products-grid"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- Empty Result -->
+
+                <p
+                    id="no-results"
+                    class="no-results"
+                    hidden
+                >
+                    No products found.
+                </p>
+
+
+                <!-- Local Storage Cart -->
+
+                <div class="cart-box">
+
+                    <h3>
+                        Saved Cart Items:
+                        <span id="cart-count">0</span>
+                    </h3>
+
+                    <button
+                        type="button"
+                        id="clear-cart"
+                        class="button secondary"
+                    >
+                        Clear Saved Cart
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Reports -->
+
+            <section
+                id="reports"
+                class="content-section"
+                aria-labelledby="reports-title"
+            >
+
+                <div class="section-heading">
+                    <p class="eyebrow">Performance</p>
+                    <h2 id="reports-title">Reports</h2>
+                </div>
+
+                <div class="glass-card table-container">
+
+                    <table>
+
+                        <caption>
+                            Project performance report
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Project</th>
+                                <th scope="col">Owner</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Progress</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">Website Redesign</th>
+                                <td>John Smith</td>
+                                <td>Active</td>
+                                <td>75%</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Mobile Application</th>
+                                <td>Sarah Lee</td>
+                                <td>Completed</td>
+                                <td>100%</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">Marketing Campaign</th>
+                                <td>David Brown</td>
+                                <td>Pending</td>
+                                <td>40%</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- Users -->
+
+            <section
+                id="users"
+                class="content-section"
+                aria-labelledby="users-title"
+            >
+
+                <div class="section-heading">
+                    <p class="eyebrow">Management</p>
+                    <h2 id="users-title">Add User</h2>
+                </div>
+
+                <div class="glass-card">
+
+                    <form>
+
+                        <fieldset>
+
+                            <legend>User Information</legend>
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="name">
+                                        Full Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="email">
+                                        Email Address
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="role">
+                                        Role
+                                    </label>
+
+                                    <select id="role" name="role">
+
+                                        <option value="">
+                                            Select a role
+                                        </option>
+
+                                        <option value="admin">
+                                            Administrator
+                                        </option>
+
+                                        <option value="manager">
+                                            Manager
+                                        </option>
+
+                                        <option value="employee">
+                                            Employee
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+
+
+                        <button
+                            type="submit"
+                            class="button primary"
+                        >
+                            Add User
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- Settings -->
+
+            <section
+                id="settings"
+                class="content-section"
+                aria-labelledby="settings-title"
+            >
+
+                <div class="section-heading">
+
+                    <p class="eyebrow">Preferences</p>
+
+                    <h2 id="settings-title">
+                        Settings
+                    </h2>
+
+                </div>
+
+
+                <div class="glass-card">
+
+                    <label class="checkbox-label">
+
+                        <input
+                            type="checkbox"
+                            id="notifications"
+                        >
+
+                        <span>
+                            Enable notifications
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <footer class="site-footer">
+
+        <div class="container footer-content">
+
+            <p>
+                &copy; 2026 Enterprise Dashboard
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- IMPORTANT: JavaScript module -->
+
+    <script
+        type="module"
+        src="app.js"
+    ></script>
+
+</body>
+</html>
